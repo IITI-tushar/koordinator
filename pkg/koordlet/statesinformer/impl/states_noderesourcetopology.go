@@ -183,6 +183,9 @@ func NewNodeTopoInformer() *nodeTopoInformer {
 func (s *nodeTopoInformer) GetNodeTopo() *v1alpha1.NodeResourceTopology {
 	s.nodeTopoMutex.RLock()
 	defer s.nodeTopoMutex.RUnlock()
+	if s.nodeTopology == nil {
+		return nil
+	}
 	return s.nodeTopology.DeepCopy()
 }
 
